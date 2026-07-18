@@ -15,7 +15,9 @@ public class Journal
     {
         if (_entries.Count == 0)
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("The journal is currently empty.");
+            Console.ResetColor();
             return;
         }
 
@@ -34,7 +36,10 @@ public class Journal
                 writer.WriteLine($"{entry._date}|{entry._promptText}|{entry._entryText}");
             }
         }
+        Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("Journal saved successfully!");
+        Console.ResetColor();
+
     }
 
     public void LoadFromFile(string file)
@@ -59,11 +64,35 @@ public class Journal
                     AddEntry(loadedEntry);
                 }
             }
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Journal loaded successfully!");
+            Console.ResetColor();
         }
         else
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Error: File not found.");
+            Console.ResetColor();
+
+            Console.Write($"Would you like to create '{file}' as a new empty file? (yes/no): ");
+            string response = Console.ReadLine().ToLower();
+
+            if (response == "yes" || response == "y")
+            {
+                File.Create(file).Close();
+
+                _entries.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Empty TXT file successfully created!");
+                Console.ResetColor();
+            }
+            else
+            {
+              Console.ForegroundColor = ConsoleColor.Yellow;
+              Console.WriteLine("Load canceled.");
+              Console.ResetColor();
+              
+            }
         }
     }
 
@@ -113,6 +142,10 @@ public class Journal
         }
         else
         {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Error: File not found.");
+            Console.ResetColor();
+
             Console.Write($"The file '{file}' does not exist. Would you like to create it as a new empty file? (yes/no): ");
             string response = Console.ReadLine().ToLower();
 
