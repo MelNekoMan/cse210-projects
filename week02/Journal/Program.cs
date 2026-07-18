@@ -1,3 +1,10 @@
+/*ENHANCEMENTS:
+    1. Implemented Multi-Format Support allowing the user to save/load in both standard .txt and .csv (Excel) formats.
+    2. Added robust error handling using int.TryParse() to prevent terminal crashes from invalid user inputs.
+    3. Created dynamic file generation that prompts the user to automatically build a new file if the specified path does not exist.
+    4. Integrated dynamic console color-coding (Green/Red/Yellow) to provide instant visual feedback on program operations.
+*/
+
 using System;
 
 class Program
